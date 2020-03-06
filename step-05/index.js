@@ -3,13 +3,13 @@ var app = express();
 var assert = require('assert');
 var MongoClient = require('mongodb').MongoClient;
 
-
 app.get('/beers', async function (req, res) {
   console.log('Received request for beers from', req.ip);
   let client;
   try {  
     client = await MongoClient.connect(url);
     const db = client.db(dbName);
+    
     var beerList = await db.collection('beers').find().toArray();
     res.json(beerList);
   } catch(err) {
@@ -41,7 +41,7 @@ app.use('/img', express.static('img'));
 app.use(express.static('public'));
 
 var url = process.env.MONGODB_ADDON_URI || 'mongo://localhost:2127';
-var dbName = 'beers'
+var dbName = process.env.MONGODB_ADDON_DB;
 
 
 
