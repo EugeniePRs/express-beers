@@ -41,7 +41,7 @@ app.use('/img', express.static('img'));
 app.use(express.static('public'));
 
 var url = process.env.MONGODB_ADDON_URI || 'mongo://localhost:2127';
-var dbName = 'test'
+var dbName = 'express-beer'
 
 
 
